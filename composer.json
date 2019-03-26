@@ -1,0 +1,24 @@
+{
+    "name": "slogsdon/ssr-web-components",
+    "description": "Test for using PHP to render native web components / custom elements on the server side",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shane Logsdon",
+            "email": "shane@shanelogsdon.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "src/templates.php"
+        ]
+    },
+    "require": {},
+    "scripts": {
+        "start": "@php -S 0.0.0.0:5000 -t public"
+    },
+    "config": {
+        "process-timeout": 0
+    }
+}
