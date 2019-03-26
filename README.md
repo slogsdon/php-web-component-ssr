@@ -1,6 +1,6 @@
 # php-ssr-web-components
 
-> Demo server-side rendering of web components with PHP
+> Demo of a server-side rendering approach for PHP + web components
 
 ### Features
 
