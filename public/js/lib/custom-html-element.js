@@ -8,7 +8,7 @@
 export class CustomHTMLElement extends HTMLElement {
   /**
    * Custom element's name
-   * @type {string}
+   * @type {string | undefined}
    */
   static get is() { return undefined; }
 

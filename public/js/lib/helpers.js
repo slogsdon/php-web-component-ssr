@@ -37,6 +37,8 @@ export function hydrate(name, slotElementType) {
       });
     }
 
-    oldChild.parentNode.replaceChild(newChild, oldChild);
+    if (oldChild.parentNode) {
+      oldChild.parentNode.replaceChild(newChild, oldChild);
+    }
   });
 };
