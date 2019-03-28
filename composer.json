@@ -10,8 +10,11 @@
         }
     ],
     "autoload": {
+        "psr-4": {
+            "Slogsdon\\SSRWebComponents\\": "src/"
+        },
         "files": [
-            "src/templates.php"
+            "src/functions.php"
         ]
     },
     "require": {},

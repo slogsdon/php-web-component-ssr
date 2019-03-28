@@ -1,5 +1,7 @@
 // @ts-check
 
+import { hydrate } from "./helpers.js";
+
 /**
  * Requires a `template` element to be present on page with the custom element's
  * client-side template. The `template` element should have an `id` of the custom
@@ -56,5 +58,22 @@ export class CustomHTMLElement extends HTMLElement {
     this.shadowRoot.appendChild(
       this.template.content.cloneNode(true),
     );
+
+    /** @type {string[]} */
+    const shadowsCustomElements = [];
+    /** @type {(el: Element) => void} */
+    const hydrateSubComponents = (el) => {
+      const name = el.getAttribute('data-template');
+
+      if (!name || shadowsCustomElements.indexOf(name) !== -1) {
+        return;
+      }
+
+      shadowsCustomElements.push(name);
+      hydrate(name);
+    };
+
+    this.shadowRoot.querySelectorAll('[data-template]').forEach(hydrateSubComponents);
+    this.querySelectorAll('[data-template]').forEach(hydrateSubComponents);
   }
 }

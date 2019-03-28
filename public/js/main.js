@@ -1,8 +1,15 @@
 // @ts-check
 
 import { hydrate } from './lib/helpers.js';
-import { XListItem } from './components.js';
+import { XList, XListItem } from './components.js';
+
+const components = [
+  XListItem,
+  XList,
+];
 
 window.addEventListener('DOMContentLoaded', () => {
-    XListItem.register().then(() => hydrate(XListItem.is, 'div'));
+  components.map((component) => {
+    component.register().then(() => hydrate(component.is));
+  });
 });

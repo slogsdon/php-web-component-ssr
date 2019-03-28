@@ -35,7 +35,7 @@ On page load, PHP will output a template file as HTML. It will also prepare the 
 
 Source files within [`src`](src) contain the server-side implementation, and source files within [`public/js/lib`](public/js/lib) contain the client-side implementation. Both are capable of being extracted as a reusable library.
 
-Other source files within [`public`](public) and [`templates`](templates) demonstrate how the server- and client-side implementations can be leveraged.
+Other source files within [`public`](public) demonstrate how the server- and client-side implementations can be leveraged.
 
 ## License
 
