@@ -26,28 +26,37 @@ export function hydrate(name, slotElementType) {
     const initialData = oldChild.getAttribute('data-initial-data');
 
     if (initialData) {
-      try {
-        // named slots via JSON
-        const data = JSON.parse(initialData);
-        Object.keys(data).forEach((key) => {
-          const el = document.createElement(slotElementType || 'span');
-          el.slot = key;
-          el.innerHTML = data[key];
-          newChild.appendChild(el);
-        });
-      } catch (e) {
-        // one, unnamed slot
-        newChild.innerHTML = decodeURI(initialData)
-          // additional replacements for PHP's `urlencode`
-          .replace(/%3[dD]/g, '=')
-          .replace(/\+/g, ' ')
-          .replace(/%2[fF]/g, '/');
-        console.log(newChild.innerHTML);
-      }
+      hydrateInitialData(initialData, slotElementType, newChild);
     }
 
     if (oldChild.parentNode) {
       oldChild.parentNode.replaceChild(newChild, oldChild);
     }
   });
-};
+}
+
+/**
+ *
+ * @param {string} initialData A custom element's initial data
+ * @param {string | undefined} slotElementType Name used when defining slot content
+ *    for an element's initial data.
+ * @param {HTMLElement} newChild Newly created element
+ */
+function hydrateInitialData(initialData, slotElementType, newChild) {
+  try {
+    const data = JSON.parse(initialData);
+    Object.keys(data).forEach((key) => {
+      const el = document.createElement(slotElementType || 'span');
+      el.slot = key;
+      el.innerHTML = data[key];
+      newChild.appendChild(el);
+    });
+  } catch (e) {
+    // one, unnamed slot
+    newChild.innerHTML = decodeURI(initialData)
+      // additional replacements for PHP's `urlencode`
+      .replace(/%3[dD]/g, '=')
+      .replace(/\+/g, ' ')
+      .replace(/%2[fF]/g, '/');
+  }
+}

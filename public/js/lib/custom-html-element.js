@@ -46,7 +46,7 @@ export class CustomHTMLElement extends HTMLElement {
 
       /** @type {HTMLTemplateElement} */
       // @ts-ignore
-      this.template = document.getElementById(`template-${this.constructor.is}`);;
+      this.template = document.getElementById(`template-${this.constructor.is}`);
       this.attachShadow({ mode: 'open' });
   }
 
@@ -73,7 +73,10 @@ export class CustomHTMLElement extends HTMLElement {
       hydrate(name);
     };
 
-    this.shadowRoot.querySelectorAll('[data-template]').forEach(hydrateSubComponents);
-    this.querySelectorAll('[data-template]').forEach(hydrateSubComponents);
+    [
+      ...this.shadowRoot.querySelectorAll('[data-template]'),
+      ...this.querySelectorAll('[data-template]'),
+    ]
+      .forEach(hydrateSubComponents);
   }
 }
