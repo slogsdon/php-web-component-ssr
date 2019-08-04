@@ -16,4 +16,4 @@ use function Slogsdon\SSRWebComponents\getTemplate;
 <?= getClientTemplate('x-list'); ?>
 <?= getClientTemplate('x-list-item'); ?>
 
-<script type="module" src="/js/main.js"></script>
+<script async type="module" src="/js/main.js"></script>

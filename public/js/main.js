@@ -1,6 +1,6 @@
 // @ts-check
 
-import { hydrate } from './lib/helpers.js';
+import { hydrate, onReady } from './lib/helpers.js';
 import { XList, XListItem } from './components.js';
 
 const components = [
@@ -8,8 +8,9 @@ const components = [
   XList,
 ];
 
-window.addEventListener('DOMContentLoaded', () => {
-  components.map((component) => {
-    component.register().then(() => hydrate(component.is));
+onReady(() => {
+  components.map(async (component) => {
+    await component.register();
+    hydrate(component.is)
   });
 });

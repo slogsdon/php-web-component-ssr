@@ -12,16 +12,17 @@
  *    for an element's initial data. Default is `span`.
  */
 export function hydrate(name, slotElementType) {
+  // skip if no custom elements support or element hasn't yet been defined
   if (!window.customElements || customElements.get(name) === undefined) {
     return;
   }
 
-  document.querySelectorAll(`[data-template="${name}"]`).forEach((oldChild) => {
-    // skip if client template isn't present
-    if (!document.getElementById(`template-${name}`)) {
-      return;
-    }
+  // skip if client template isn't present
+  if (!document.getElementById(`template-${name}`)) {
+    return;
+  }
 
+  document.querySelectorAll(`[data-template="${name}"]`).forEach((oldChild) => {
     const newChild = document.createElement(name);
     const initialData = oldChild.getAttribute('data-initial-data');
 
@@ -36,6 +37,7 @@ export function hydrate(name, slotElementType) {
 }
 
 /**
+ * Hydrates server-side rendered initial data for custom elements / web components.
  *
  * @param {string} initialData A custom element's initial data
  * @param {string | undefined} slotElementType Name used when defining slot content
@@ -59,4 +61,19 @@ function hydrateInitialData(initialData, slotElementType, newChild) {
       .replace(/\+/g, ' ')
       .replace(/%2[fF]/g, '/');
   }
+}
+
+/**
+ * Helper function around the `DOMContentLoaded` event to fire
+ * the event handler if the event has already been triggered
+ *
+ * @param {(e?: Event) => void} callback
+ */
+export function onReady(callback) {
+  if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', callback);
+    return;
+  }
+
+  cb();
 }

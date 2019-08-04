@@ -21,13 +21,13 @@ export class CustomHTMLElement extends HTMLElement {
    * When custom elements are not available for the current browser, a rejected
    * promise is returned.
    */
-  static register() {
+  static async register() {
     if (this.is === undefined) {
-      return Promise.reject(new Error('No defined name'));
+      throw new Error('No defined name');
     }
 
     if (!window.customElements) {
-      return Promise.reject(new Error('window.customElements not available'));
+      throw new Error('window.customElements not available');
     }
 
     const elementName = this.is;
@@ -65,6 +65,7 @@ export class CustomHTMLElement extends HTMLElement {
     const hydrateSubComponents = (el) => {
       const name = el.getAttribute('data-template');
 
+      // skip if missing element name or already hydrated elements
       if (!name || shadowsCustomElements.indexOf(name) !== -1) {
         return;
       }
@@ -74,8 +75,8 @@ export class CustomHTMLElement extends HTMLElement {
     };
 
     [
-      ...this.shadowRoot.querySelectorAll('[data-template]'),
       ...this.querySelectorAll('[data-template]'),
+      ...this.shadowRoot.querySelectorAll('[data-template]'),
     ]
       .forEach(hydrateSubComponents);
   }
