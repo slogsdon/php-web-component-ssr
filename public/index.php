@@ -1,4 +1,8 @@
-<!DOCTYPE html><?php require '../vendor/autoload.php'; ?>
+<!DOCTYPE html><?php
+require '../vendor/autoload.php';
+use function Slogsdon\SSRWebComponents\getClientTemplate;
+use function Slogsdon\SSRWebComponents\getTemplate;
+?>
 
 <!-- server rendered -->
 <?= getTemplate('x-list', getTemplate('x-list-item', 'content')); ?>

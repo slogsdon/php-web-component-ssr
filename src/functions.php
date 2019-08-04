@@ -1,5 +1,7 @@
 <?php
 
+namespace Slogsdon\SSRWebComponents;
+
 use Slogsdon\SSRWebComponents\CustomElement;
 
 /**
