@@ -1,0 +1,12 @@
+{
+  "name": "ssr-web-components",
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": "https://github.com/slogsdon/php-ssr-web-components",
+  "author": "Shane Logsdon <shane@shanelogsdon.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "web-component-hydration": "^1.0.0"
+  }
+}

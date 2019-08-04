@@ -1,6 +1,6 @@
 // @ts-check
 
-import { CustomHTMLElement } from './lib/custom-html-element.js';
+import { CustomHTMLElement } from './node_modules/web-component-hydration/custom-html-element.js';
 
 export class XList extends CustomHTMLElement {
   static get is() { return 'x-list'; }
