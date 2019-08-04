@@ -7,7 +7,7 @@ use Slogsdon\SSRWebComponents\CustomElement;
  * creating `slot` elements for any PHP variables.
  *
  * @param string $name Custom element name
- * @param array|string $data Template data
+ * @param string|string[] $data Template data
  * @return string
  */
 function getClientTemplate(string $name, $data = null): string
@@ -23,7 +23,7 @@ function getClientTemplate(string $name, $data = null): string
  * code can leverage `data-` attributes to hydrate the page.
  *
  * @param string $name Custom element name
- * @param array|string $data Template data
+ * @param string|string[] $data Template data
  * @return string
  */
 function getTemplate(string $name, $data = null): string
@@ -43,8 +43,15 @@ function getTemplate(string $name, $data = null): string
  */
 function getTemplateSource(string $name, array $data = []): string
 {
+    $templatePath = realpath(sprintf('%s/../public/js/templates/%s.html', __DIR__, $name));
+
+    if (!is_file($templatePath)) {
+        return '';
+    }
+
     ob_start();
     extract($data);
-    include sprintf('%s/../public/js/templates/%s.html', __DIR__, $name);
+    /** @psalm-suppress UnresolvableInclude */
+    include $templatePath;
     return ob_get_clean();
 }

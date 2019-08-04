@@ -12,8 +12,8 @@ class CustomElement
     /** @var string */
     const MBSTRING_ENCODING_UTF8 = 'UTF-8';
 
-    /** @var string */
-    protected $data;
+    /** @var string|string[]|null */
+    protected $data = null;
 
     /** @var DOMDocument */
     protected $dom;
@@ -37,8 +37,8 @@ class CustomElement
     {
         $this->dom->loadXML(mb_convert_encoding(
             $html,
-            static::MBSTRING_ENCODING_HTML,
-            static::MBSTRING_ENCODING_UTF8
+            self::MBSTRING_ENCODING_HTML,
+            self::MBSTRING_ENCODING_UTF8
         ));
 
         // automatically set `id` attribute for use on client-side
@@ -52,7 +52,7 @@ class CustomElement
     /**
      * Adds data for template slots
      *
-     * @param string|array $data
+     * @param string|string[] $data
      * @return CustomElement
      */
     public function withData($data = null): self
@@ -89,14 +89,19 @@ class CustomElement
 
         // set initial data for client side
         if (!empty($initialData)) {
-            $div->setAttribute('data-initial-data', urlencode($this->data));
+            $div->setAttribute('data-initial-data', urlencode($initialData));
         }
 
         // rest of method expects the `template` node to be first and only child
         // of the document (`$this->dom`)
 
-        // copy `template` attributes
-        foreach ($this->dom->firstChild->attributes as $attribute) {
+        $firstChild = $this->dom->firstChild;
+
+        /**
+         * copy `template` attributes
+         * @var \DOMNode $attribute
+         */
+        foreach ($firstChild->attributes as $attribute) {
             if ($attribute->localName === 'id') {
                 continue;
             }
@@ -104,12 +109,12 @@ class CustomElement
         }
 
         // copy `template` children
-        while ($this->dom->firstChild->firstChild) {
-            $div->appendChild($this->dom->firstChild->firstChild);
+        while ($firstChild->hasChildNodes()) {
+            $div->appendChild($firstChild->firstChild);
         }
 
         // replace `template` with `div`
-        $this->dom->replaceChild($div, $this->dom->firstChild);
+        $this->dom->replaceChild($div, $firstChild);
 
         return $this->dom->saveHTML();
     }
@@ -124,7 +129,7 @@ class CustomElement
         return $this->dom->saveHTML();
     }
 
-    protected function injectSlotData()
+    protected function injectSlotData(): void
     {
         if (!$this->data) {
             return;
