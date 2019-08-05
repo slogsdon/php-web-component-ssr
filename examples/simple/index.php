@@ -1,5 +1,5 @@
 <!DOCTYPE html><?php
-require '../vendor/autoload.php';
+require '../../vendor/autoload.php';
 use function Slogsdon\SSRWebComponents\getClientTemplate;
 use function Slogsdon\SSRWebComponents\getTemplate;
 ?>
