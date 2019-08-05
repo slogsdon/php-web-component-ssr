@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Slogsdon\SSRWebComponents;
+namespace WebComponentSSR;
 
 use DOMDocument;
 

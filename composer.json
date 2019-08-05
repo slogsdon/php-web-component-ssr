@@ -1,7 +1,7 @@
 {
-    "name": "slogsdon/ssr-web-components",
-    "description": "Test for using PHP to render native web components / custom elements on the server side",
-    "type": "project",
+    "name": "slogsdon/web-component-ssr",
+    "description": "Provides server-side rendering support for native web components / custom elements",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -11,18 +11,21 @@
     ],
     "autoload": {
         "psr-4": {
-            "Slogsdon\\SSRWebComponents\\": "src/"
+            "WebComponentSSR\\": "src/"
         },
         "files": [
             "src/functions.php"
         ]
     },
-    "require": {},
+    "require": {
+        "ext-dom": "*",
+        "ext-json": "*"
+    },
     "require-dev": {
         "vimeo/psalm": "^3.4"
     },
     "scripts": {
-        "start": "@php -S 0.0.0.0:5000 -t public",
+        "start": "@php -S 0.0.0.0:5000 -t examples/simple",
         "test": [
             "psalm"
         ]

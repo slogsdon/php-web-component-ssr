@@ -1,8 +1,8 @@
 <?php
 
-namespace Slogsdon\SSRWebComponents;
+namespace WebComponentSSR;
 
-use Slogsdon\SSRWebComponents\CustomHTMLElement;
+use WebComponentSSR\CustomHTMLElement;
 
 /**
  * Wraps template files in client-side friendly `template` elements,
