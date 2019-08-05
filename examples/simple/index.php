@@ -2,6 +2,8 @@
 require '../../vendor/autoload.php';
 use function Slogsdon\SSRWebComponents\getClientTemplate;
 use function Slogsdon\SSRWebComponents\getTemplate;
+
+Slogsdon\SSRWebComponents\templateLocation(__DIR__ . '/js/templates');
 ?>
 
 <!-- server rendered -->

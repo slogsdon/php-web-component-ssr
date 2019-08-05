@@ -45,7 +45,7 @@ function getTemplate(string $name, $data = null): string
  */
 function getTemplateSource(string $name, array $data = []): string
 {
-    $templatePath = realpath(sprintf('%s/../public/js/templates/%s.html', __DIR__, $name));
+    $templatePath = sprintf('%s/%s.html', templateLocation(), $name);
 
     if (!is_file($templatePath)) {
         return '';
@@ -56,4 +56,26 @@ function getTemplateSource(string $name, array $data = []): string
     /** @psalm-suppress UnresolvableInclude */
     include $templatePath;
     return ob_get_clean();
+}
+
+/**
+ * Gets or sets the location of stored templates
+ *
+ * @param string $directory Location of stored templates
+ * @return string
+ */
+function templateLocation($directory = null): string
+{
+    /** @var string */
+    static $templateLocation = '';
+
+    if ($directory !== null) {
+        $templateLocation = realpath($directory);
+    }
+
+    if ($templateLocation === '') {
+        $templateLocation = getcwd();
+    }
+
+    return $templateLocation;
 }
