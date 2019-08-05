@@ -2,7 +2,7 @@
 
 namespace Slogsdon\SSRWebComponents;
 
-use Slogsdon\SSRWebComponents\CustomElement;
+use Slogsdon\SSRWebComponents\CustomHTMLElement;
 
 /**
  * Wraps template files in client-side friendly `template` elements,
@@ -14,7 +14,7 @@ use Slogsdon\SSRWebComponents\CustomElement;
  */
 function getClientTemplate(string $name, $data = null): string
 {
-    return (new CustomElement($name))
+    return (new CustomHTMLElement($name))
         ->withSource(getTemplateSource($name))
         ->withData($data)
         ->asTemplate();
@@ -30,7 +30,7 @@ function getClientTemplate(string $name, $data = null): string
  */
 function getTemplate(string $name, $data = null): string
 {
-    return (new CustomElement($name))
+    return (new CustomHTMLElement($name))
         ->withSource(getTemplateSource($name))
         ->withData($data)
         ->asHTML();

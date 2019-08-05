@@ -4,7 +4,7 @@ namespace Slogsdon\SSRWebComponents;
 
 use DOMDocument;
 
-class CustomElement
+class CustomHTMLElement
 {
     /** @var string */
     const MBSTRING_ENCODING_HTML = 'HTML-ENTITIES';
@@ -31,7 +31,7 @@ class CustomElement
      * Imports HTML source for a web component
      *
      * @param string $html
-     * @return CustomElement
+     * @return CustomHTMLElement
      */
     public function withSource($html): self
     {
@@ -53,7 +53,7 @@ class CustomElement
      * Adds data for template slots
      *
      * @param string|string[] $data
-     * @return CustomElement
+     * @return CustomHTMLElement
      */
     public function withData($data = null): self
     {
@@ -67,7 +67,7 @@ class CustomElement
     }
 
     /**
-     * Exports `CustomElement` as server-side string
+     * Exports `CustomHTMLElement` as server-side string
      *
      * @return string
      */
@@ -120,7 +120,7 @@ class CustomElement
     }
 
     /**
-     * Exports `CustomElement` as client-side string
+     * Exports `CustomHTMLElement` as client-side string
      *
      * @return string
      */
