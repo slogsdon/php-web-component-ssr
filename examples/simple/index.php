@@ -7,11 +7,11 @@ WebComponentSSR\templateLocation(__DIR__ . '/js/templates');
 ?>
 
 <!-- server rendered -->
-<?= getTemplate('x-list', getTemplate('x-list-item', 'content')); ?>
+<?= getTemplate('x-list', getTemplate('x-list-item', ['label' => 'content', 'foo' => 'bar'])); ?>
 
 <!-- client rendered -->
 <x-list-item>
-    <span>temp</span>
+    <span slot="label">temp</span>
 </x-list-item>
 
 <!-- client template -->

@@ -3,6 +3,6 @@
 
 
 web-component-hydration@^1.0.0:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/web-component-hydration/-/web-component-hydration-1.0.3.tgz#2c932c095f61a1e772b81a4f05c8d50bf7fa5836"
-  integrity sha512-XFsZE5cZxrusG0uXTQcaEEJI++FD+MzZgZxv+pF4PL5M4EeXxwWQ4BRekEXtpV/iW2SgNea/H1QmjdtiG5PgAQ==
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/web-component-hydration/-/web-component-hydration-1.0.5.tgz#d1c0cf95b27856bf99686e9accb89611a42eabe1"
+  integrity sha512-WsJnGk3Ldt7apjmZxTbWn/r6sJbS7a6JDORvGKSa5xjUEwINcGQPhq8EowGSxP1h0IJag3DpMCF2RJuXPGBVog==
