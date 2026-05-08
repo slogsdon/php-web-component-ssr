@@ -1,3 +1,5 @@
+> **[shane.logsdon.io](https://shane.logsdon.io)** — writing and projects on agentic workflows, web standards, and payments engineering.
+
 # web-component-ssr
 
 > Provides server-side rendering support for native web components / custom elements
