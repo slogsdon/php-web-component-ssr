@@ -1,0 +1,367 @@
+/* Shane Logsdon — Design Tokens (v3)
+   v2 established the editorial register; v3 adds the drafting apparatus —
+   annotation red, drawing classes, callout bubbles, and the title block.
+   All v3 additions are ADDITIVE: every existing artifact keeps rendering.
+   Directory slug stays `shane-personal-v2` (publish-post hardcodes it).
+   See DESIGN.md for the architecture mapping table and figure taxonomy. */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ─── Color — committed cream page + dark-inversion feature treatment ─── */
+  --color-surface:         #fbfaf9;        /* primary warm cream — the page is committed to this */
+  --color-surface-feature: #ede4d2;        /* RESERVED token — aged-clay; not used as a background in v2 (kept for special tonal accents only; canonical "feature" treatment is dark inversion below) */
+  --color-surface-muted:   #f1eee8;        /* a half-step deeper cream — for genuine card affordance only */
+  --color-ink:             #0e1116;        /* darkened from v1's #181b21 — more architectural */
+  --color-ink-soft:        #404550;        /* secondary ink */
+  --color-ink-3:           #62686f;        /* metadata ink */
+  --color-rule:            #d6d8de;        /* the only rule color — 1px hairline; major divisions communicated via whitespace, not weight */
+  --color-border:            #d9dade;        /* HSL bridge: 228 7% 86% */
+  --color-rule-strong:       #aeb1ba;        /* HSL bridge: 225 8% 71% */
+  --color-grid:            #e0e2e6;        /* technical grid */
+  --color-accent:          #556b2f;        /* olive green — used semantically AND as deliberate type accent */
+  --color-accent-hover:    #3e5020;
+  --color-mark:            #c0392b;        /* v3: annotation red. ONE job — marking what a drawing calls out:
+                                              dimension lines, witness marks, callout bubbles, hatch, a value
+                                              that turned red. Never a heading, never a link, and never on a
+                                              page with no figure on it. */
+  /* No signal palette — this brand doesn't use it. */
+  /* Contrast: --color-accent on --color-ink is 3.2:1 — large text only. Inside
+     .inversion, links take the cream text color, not olive. */
+
+  /* ─── Typography — Fraunces does display AND small-caps editorial labels ─── */
+  --type-display-family:   'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --type-sans-family:      'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --type-mono-family:      'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Display scale — pushed to publication cover sizes */
+  --fs-display-xxl:  9rem;       /* 144px — hero cover scale */
+  --fs-display-xl:   6rem;       /* 96px — secondary hero */
+  --fs-display:      4.5rem;     /* 72px */
+  --fs-headline-lg:  3.5rem;     /* 56px */
+  --fs-headline-md:  2.25rem;    /* 36px */
+  --fs-headline-sm:  1.5rem;     /* 24px */
+
+  /* Body — shifted up; real publication body sizes */
+  --fs-lead:         1.1875rem;  /* 19px — lead paragraph */
+  --fs-body-lg:      1.0625rem;  /* 17px — body */
+  --fs-body-md:      1rem;       /* 16px — secondary body */
+  --fs-meta:         0.875rem;   /* 14px */
+
+  /* Editorial labels — Fraunces small caps, NOT mono caps */
+  --fs-smallcaps-lg: 0.875rem;   /* 14px */
+  --fs-smallcaps:    0.75rem;    /* 12px */
+
+  /* Mono — restricted to dateline + code only */
+  --fs-dateline:     0.75rem;    /* 12px */
+  --fs-code:         0.875rem;   /* 14px */
+
+  /* Line heights */
+  --lh-cover:        0.96;       /* 144px display */
+  --lh-tight:        1.0;        /* 96px display */
+  --lh-snug:         1.05;
+  --lh-normal:       1.18;
+  --lh-prose:        1.65;       /* tightened body — denser column */
+
+  /* Letter-spacing */
+  --tracking-cover:    -0.022em;
+  --tracking-display:  -0.02em;
+  --tracking-tight:    -0.015em;
+  --tracking-normal:   0;
+  --tracking-smallcaps: 0.08em;     /* Fraunces small-caps default */
+  --tracking-smallcaps-tight: 0.06em;
+  --tracking-mono:     0.06em;       /* mono dateline */
+
+  /* ─── Spacing (unchanged from v1) ─── */
+  --s-1:  0.25rem;  --s-2:  0.5rem;   --s-3:  0.75rem;  --s-4:  1rem;
+  --s-5:  1.5rem;   --s-6:  2rem;     --s-7:  3rem;     --s-8:  4rem;
+  --s-9:  6rem;     --s-10: 9rem;     /* upper bumped to 144px for cover-scale jumps */
+
+  /* ─── Layout ─── */
+  --measure:    64ch;       /* tightened from v1's 68ch — denser column */
+  --container:  1180px;     /* unchanged */
+  --gutter:     1.5rem;
+
+  /* ─── Radii — sharper than v1 ─── */
+  --r-0:        0;
+  --r-hairline: 1px;
+  --r-sm:       2px;        /* used rarely — only on a few interactive elements */
+  --r-full:     999px;      /* avatars only */
+
+  /* ─── Motion ─── */
+  --ease:       cubic-bezier(0.2, 0.6, 0.2, 1);
+  --dur:        200ms;
+}
+
+/* ─── Type utility classes ─── */
+.t-display-xxl  { font-family: var(--type-display-family); font-weight: 400; font-size: var(--fs-display-xxl); line-height: var(--lh-cover); letter-spacing: var(--tracking-cover); }
+.t-display-xl   { font-family: var(--type-display-family); font-weight: 400; font-size: var(--fs-display-xl); line-height: var(--lh-tight); letter-spacing: var(--tracking-display); }
+.t-display      { font-family: var(--type-display-family); font-weight: 400; font-size: var(--fs-display); line-height: var(--lh-snug); letter-spacing: var(--tracking-display); }
+.t-headline-lg  { font-family: var(--type-display-family); font-weight: 500; font-size: var(--fs-headline-lg); line-height: 1.1; letter-spacing: var(--tracking-tight); }
+.t-headline-md  { font-family: var(--type-display-family); font-weight: 500; font-size: var(--fs-headline-md); line-height: var(--lh-normal); letter-spacing: var(--tracking-tight); }
+.t-headline-sm  { font-family: var(--type-display-family); font-weight: 500; font-size: var(--fs-headline-sm); line-height: 1.3; }
+
+/* Lead + body */
+.t-lead         { font-family: var(--type-sans-family); font-size: var(--fs-lead); line-height: var(--lh-prose); color: var(--color-ink); }
+.t-body         { font-family: var(--type-sans-family); font-size: var(--fs-body-lg); line-height: var(--lh-prose); color: var(--color-ink); }
+.t-body-md      { font-family: var(--type-sans-family); font-size: var(--fs-body-md); line-height: var(--lh-prose); color: var(--color-ink-soft); }
+.t-meta         { font-family: var(--type-sans-family); font-size: var(--fs-meta); line-height: 1.5; color: var(--color-ink-3); }
+
+/* Editorial labels — Fraunces small caps. The signature v2 swap. */
+.t-smallcaps-lg {
+  font-family: var(--type-display-family);
+  font-weight: 600;
+  font-variant-caps: small-caps;
+  font-feature-settings: 'smcp';
+  text-transform: lowercase;     /* lowercase text + small-caps feature renders as small caps */
+  font-size: var(--fs-smallcaps-lg);
+  line-height: 1;
+  letter-spacing: var(--tracking-smallcaps);
+  color: var(--color-ink);
+}
+.t-smallcaps {
+  font-family: var(--type-display-family);
+  font-weight: 600;
+  font-variant-caps: small-caps;
+  font-feature-settings: 'smcp';
+  text-transform: lowercase;
+  font-size: var(--fs-smallcaps);
+  line-height: 1;
+  letter-spacing: 0.1em;
+  color: var(--color-ink-3);
+}
+
+/* Mono — only for dateline + code */
+.t-dateline {
+  font-family: var(--type-mono-family);
+  font-size: var(--fs-dateline);
+  letter-spacing: var(--tracking-mono);
+  color: var(--color-ink-3);
+}
+.t-code {
+  font-family: var(--type-mono-family);
+  font-size: var(--fs-code);
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+/* Type accent — one word per surface in olive Fraunces. Used DELIBERATELY. */
+.t-accent {
+  color: var(--color-accent);
+  font-style: normal;            /* not italic — italics-emphasis is the AI tell */
+}
+
+/* ─── Inversion — the canonical "feature" treatment ─── */
+/* Dark ink block with cream text on a committed cream page. */
+/* Used as a punctuation device, not decorative chrome. Examples: hero blocks, */
+/* a single highlighted entry in a working-notes index, full-canvas LinkedIn artifact. */
+.inversion {
+  background: var(--color-ink);
+  color: var(--color-surface);
+  /* Scoped variable swaps so descendants use cream-on-dark naturally */
+  --color-ink:       var(--color-surface);
+  --color-ink-soft:  rgba(251, 250, 249, 0.72);
+  --color-ink-3:     rgba(251, 250, 249, 0.55);
+  --color-rule:      rgba(251, 250, 249, 0.18);
+}
+
+/* ─── Rules — 1px max, always. Major divisions = whitespace, not weight. ─── */
+.rule          { height: 1px; background: var(--color-rule); border: 0; margin: 0; }
+.column-rule   { width: 1px; background: var(--color-rule); }     /* vertical rule between columns */
+
+/* ─── Folio — publication page-number convention ─── */
+.folio {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--type-mono-family);
+  font-size: var(--fs-dateline);
+  letter-spacing: var(--tracking-mono);
+  color: var(--color-ink-3);
+}
+.folio .pos { color: var(--color-ink); }     /* the page-position number is in ink */
+
+/* ─── Running head — small-caps title at top edge of an artifact ─── */
+.running-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-rule);
+  font-family: var(--type-display-family);
+  font-weight: 600;
+  font-variant-caps: small-caps;
+  font-feature-settings: 'smcp';
+  text-transform: lowercase;
+  font-size: var(--fs-smallcaps);
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+}
+
+/* ─── Wordmark — replaces v1's SL · | · Shane Logsdon ─── */
+.wordmark {
+  font-family: var(--type-display-family);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  color: var(--color-ink);
+}
+
+/* ─── Btn-arrow — the only button. Filled .btn removed in v2. ─── */
+.btn-arrow {
+  display: inline;
+  font-family: var(--type-sans-family);
+  font-size: var(--fs-body-md);
+  font-weight: 400;
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--color-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  cursor: pointer;
+  transition: color var(--dur) var(--ease), text-decoration-color var(--dur) var(--ease);
+}
+.btn-arrow::after { content: ' →'; font-family: var(--type-mono-family); font-size: 0.85em; }
+.btn-arrow:hover { text-decoration-color: var(--color-ink); }
+.btn-arrow--accent { color: var(--color-accent); text-decoration-color: var(--color-accent-hover); }
+.btn-arrow--accent:hover { color: var(--color-accent-hover); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   v3 — DRAFTING APPARATUS
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Drawing classes — inline SVG inherits the palette; never hard-code hex ─── */
+.s-ink   { stroke: var(--color-ink);   fill: none; stroke-width: 1; }
+.s-mark  { stroke: var(--color-mark);  fill: none; stroke-width: 1; }
+.s-rule  { stroke: var(--color-rule);  fill: none; stroke-width: 1; }
+/* Stroke-only. Use this — NOT .s-ink — on any rect carrying fill="url(#hatch)".
+   .s-ink declares fill:none, and CSS beats the presentation attribute, which
+   silently erases the hatch. This trap has cost real debugging time. */
+.s-edge  { stroke: var(--color-ink); stroke-width: 1; }
+
+.f-ink   { fill: var(--color-ink); }
+.f-mark  { fill: var(--color-mark); }
+.f-soft  { fill: var(--color-ink-soft); }
+.f-3     { fill: var(--color-ink-3); }
+.f-paper { fill: var(--color-surface); }
+
+/* Hatch — the 45° fill marking a region under discussion. Pattern contents
+   can't inherit currentColor from the referencing element (they resolve against
+   the pattern's own context), so the line is styled by class:
+     <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse"
+              patternTransform="rotate(45)">
+       <line x1="0" y1="0" x2="0" y2="7" class="hatch"/>
+     </pattern>                                                             */
+.hatch { stroke: var(--color-mark); stroke-width: 0.6; opacity: 0.5; }
+
+/* Text inside drawings — mono for values, Fraunces for region names */
+.t-mono  { font-family: var(--type-mono-family); font-size: 10px; }
+.t-serif { font-family: var(--type-display-family); font-size: 16px; }
+.t-sans  { font-family: var(--type-sans-family); font-size: 12px; }
+
+/* ─── Callout bubble — a figure reference number, inline in prose or on a drawing ─── */
+.callout {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 17px; height: 17px;
+  border: 1px solid var(--color-mark);
+  color: var(--color-mark);
+  border-radius: var(--r-full);          /* the only other place full radius is allowed */
+  font-family: var(--type-mono-family);
+  font-size: 10px; line-height: 1;
+  vertical-align: 1px; margin: 0 1px;
+}
+
+/* ─── Figure plate. The drawing's own container.
+   DESIGN.md §Figures: a figure does not reflow and does not scale its own type.
+   Squeezed to a phone, .t-mono lands near 6px and stops being a label. So the
+   drawing keeps its natural width and the plate scrolls sideways under it. The
+   caption sits outside the plate and wraps like ordinary text. ─── */
+.figure-plate { overflow-x: auto; }
+.figure-plate > svg { display: block; max-width: none; }
+
+/* ─── Figure caption — every figure names its source and the date it was read ─── */
+.figcaption {
+  font-family: var(--type-mono-family);
+  font-size: 11px; line-height: 1.6; letter-spacing: 0.04em;
+  color: var(--color-ink-3);
+  margin-top: 10px; padding-top: 8px;
+  border-top: 1px solid var(--color-rule);
+}
+.figcaption b { color: var(--color-ink); font-weight: 500; }
+
+/* ─── Title block — the Sheet architecture's footer. Revision and date are content. ─── */
+.title-block {
+  border-top: 1px solid var(--color-ink);
+  display: grid; grid-template-columns: 1fr auto;
+}
+.title-block__id { padding: 14px 30px 16px; }
+.title-block__cells {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(76px, auto);
+  border-left: 1px solid var(--color-ink);
+  margin: 0;
+}
+.title-block__cells > div { padding: 12px 14px; border-right: 1px solid var(--color-rule); }
+.title-block__cells > div:last-child { border-right: 0; }
+.title-block__cells dt {
+  font-family: var(--type-mono-family);
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--color-ink-3); margin: 0 0 5px;
+}
+.title-block__cells dd {
+  margin: 0; font-family: var(--type-mono-family); font-size: 12px; color: var(--color-ink);
+}
+
+/* Below ~420px the four title-block cells cannot hold minmax(76px, auto) side by side
+   and the block overflows the viewport. Found while building the v3 showcase; the
+   site mockup solved it the same way. Stack the id above the cells and run the cells
+   two up. */
+@media (max-width: 640px) {
+  .title-block { grid-template-columns: 1fr; }
+  .title-block__cells {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-left: 0;
+    border-top: 1px solid var(--color-ink);
+  }
+  .title-block__cells > div { border-bottom: 1px solid var(--color-rule); }
+  .title-block__cells > div:nth-child(2n) { border-right: 0; }
+  .title-block__cells > div:nth-last-child(-n+2) { border-bottom: 0; }
+}
+
+/* ─── Sheet — border + field + title block. No zone references or edge rulers.
+   The border is a hairline in rule color, not the 2px ink it shipped as. Ink at
+   2px read as a slab dropped on the page, and it contradicted the doctrine
+   --color-rule states at the top of this file: one rule color, 1px hairline,
+   major divisions carried by whitespace rather than weight. The sheet's edge is
+   a division like any other. The title block's ink top rule stays the heaviest
+   line on the sheet, which is correct, since that is where content ends and
+   metadata begins. ─── */
+.sheet { border: 1px solid var(--color-rule); position: relative; }
+.sheet__field { padding: 34px 34px 0; }
+
+/* ─── Assembly. The D architecture's spine: a numbered sequence down an axis.
+   Every step carries an id, so a reader arriving from a link lands on step 4
+   rather than at the top. The axis holds at the left edge and the step bodies
+   stack beside it, which is why D is the strongest architecture on a phone.
+
+   The alternating detail side described in §Architectures is deliberately not
+   built here. A detail has to earn its place under §Figures, meaning a step
+   that is genuinely unclear without it, and no step on this site has one yet.
+   Build the second column when a step earns a drawing, not before. ─── */
+.assembly { position: relative; }
+.assembly::before {
+  content: ""; position: absolute; top: 0; bottom: 0;
+  left: 12px; width: 1px; background: var(--color-rule);
+}
+.assembly__step { position: relative; padding: 30px 0 30px 56px; }
+.assembly__step + .assembly__step { border-top: 1px solid var(--color-rule); }
+.assembly__num {
+  position: absolute; left: 0; top: 32px;
+  width: 25px; height: 25px; border-radius: var(--r-full);
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-ink);
+  font-family: var(--type-mono-family);
+  font-size: 10px; line-height: 1; color: var(--color-ink);
+}

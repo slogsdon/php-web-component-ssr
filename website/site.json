@@ -1,0 +1,8 @@
+{
+  "slug": "web-component-tools",
+  "name": "Web Component Tools",
+  "origin": "https://projects.logsdon.io",
+  "description": "A PHP server-side renderer, a client-side hydration library, and a work-in-progress JSX factory for native web components.",
+  "lastmod": "2026-05-08",
+  "source": "https://github.com/slogsdon/php-web-component-ssr"
+}

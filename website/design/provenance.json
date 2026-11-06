@@ -1,0 +1,26 @@
+{
+  "design/DESIGN.md": {
+    "source": "design/shane-personal-v2/DESIGN.md",
+    "sha256": "8d8aa22854b5fb8f52aed830e21d025df1c401a5ea183dff4bee3d1835530286"
+  },
+  "design/tokens.css": {
+    "source": "design/shane-personal-v2/tokens.css",
+    "sha256": "4b873d95b38ef62b01b52f5e9e9c9a3e048ec7044afe71b5285e14f45cc8f695"
+  },
+  "LICENSE": {
+    "source": "LICENSE",
+    "sha256": "23d76181fa33ba3325992325b54d112703b270065d872eb8220ae683123c54fa"
+  },
+  "public/assets/fonts/fraunces-var.woff2": {
+    "source": "public/_/fonts/fraunces-var.woff2",
+    "sha256": "48282a415ec22e31beaf0a0666e6fae0c8cbddcd0b1f6e729f27c3ade8a64e43"
+  },
+  "public/assets/fonts/ibm-plex-sans.woff2": {
+    "source": "public/_/fonts/ibm-plex-sans.woff2",
+    "sha256": "056e4e2459f57a0033c8c9c844ff19d6e42ac8602027803d4345823bcc939818"
+  },
+  "public/assets/fonts/jetbrains-mono.woff2": {
+    "source": "public/_/fonts/jetbrains-mono.woff2",
+    "sha256": "2c32b9b3ee358c119e210f6f5195f9bd34894d78a785ff2e95d60e718e400af4"
+  }
+}

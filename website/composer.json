@@ -1,0 +1,16 @@
+{
+    "name": "slogsdon/web-component-tools-microsite",
+    "description": "Microsite for Web Component Tools",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.3",
+        "slogsdon/flat-file": "dev-code-highlight"
+    },
+    "scripts": {
+        "build": "flat-file build"
+    },
+    "config": {
+        "platform": { "php": "8.3.0" },
+        "sort-packages": true
+    }
+}
