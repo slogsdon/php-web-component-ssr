@@ -192,8 +192,17 @@ string is stale. It affects nothing the build emits.
 
 ## Deployment
 
-Not performed from this repository: no `cf deploy`, no `cf previews deploy`, no
-Cloudflare API call. This repository only produces the artifact and the Worker
-configuration. The hub owns the hostname (`projects.logsdon.io`), the sitemap
-index, and the slashless redirect; this Worker claims only
-`projects.logsdon.io/web-component-tools/*`.
+Published 2026-11-09 with a manual deploy from this directory. There is no Workers
+Builds connection yet, so a content change needs the same steps:
+
+```sh
+npm ci
+npm run build:production
+npx --no-install cf build --mode microsite-production
+npx --no-install cf deploy --prebuilt --mode microsite-production
+```
+
+Before going live, the site was checked on a noindex Worker Preview from
+`npx --no-install cf previews deploy microsite --mode microsite`. The hub owns the
+hostname (`projects.logsdon.io`), the sitemap index, and the slashless redirect;
+this Worker claims only `projects.logsdon.io/web-component-tools/*`.
