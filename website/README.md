@@ -132,6 +132,18 @@ root.
   `mb_convert_encoding(): Handling HTML entities via mbstring is deprecated`
   naming `src/CustomHTMLElement.php` line 38; the site reports that notice rather
   than hiding it.
+- **The PHP demo ran end to end, hydration included (2026-11-09).** In a scratch copy of
+  `origin/master` (`00be84d`): `composer install --no-dev`, then `npm pack
+  web-component-hydration@1.0.5`. The tarball's sha512 matches
+  `examples/simple/js/yarn.lock`, and it was unpacked as that directory's `node_modules`
+  in place of `yarn install`. The copy was served with `php -S 127.0.0.1:5077 -t
+  examples/simple` (the `composer start` command, bound to loopback) and opened with
+  Playwright in Chromium, Firefox and WebKit. In each engine, zero `[data-template]`
+  placeholders remained, `x-list` and both `x-list-item`s had shadow roots holding their
+  templates, the server-rendered item sat inside `x-list`, and the page reported no errors
+  or console errors. The unmatched `foo` datum became a `<span slot="foo">` that is never
+  projected. The page also shows the `mb_convert_encoding` deprecation, because `php -S`
+  displays errors.
 - Package metadata over plain HTTPS reads (no installs): npm reports
   `web-component-hydration` 1.0.5 as latest (published 2019-08-06) and
   `jsx-for-web-components` 1.2.1 as latest (published 2018-12-29); Packagist
@@ -145,20 +157,20 @@ root.
 
 ## Not verified here (Unverified)
 
-Nothing client-side was executed: no browser, and no bundler beyond the site's own
-packaging. Anything below is quoted from the source and marked as such on the page.
+Apart from the demo run above, nothing client-side was executed. Anything below is
+quoted from the source and marked as such on the page.
 
 - `cd examples/simple && yarn install` and `cd ../.. && composer start` — from
-  `php-web-component-ssr` `README.md` (Running the demo). Not run: the first
-  installs the product's npm dependency.
+  `php-web-component-ssr` `README.md` (Running the demo). Not run literally: the demo
+  run above used the npm tarball that matches the lockfile instead of `yarn install`,
+  and served it with `php -S` on loopback.
 - `composer test` (Psalm) — from `php-web-component-ssr` `composer.json`. Not run.
 - The PHP 7.1+ requirement — read from `README.md`. Only PHP 8.5.11 was exercised
   here, and only through the two render functions, not through the built-in server.
-- All hydration behaviour: replacing `[data-template]` placeholders, the
-  `data-initial-data` decoding path, the shadow-root clone, the nested-component
-  hydration in `connectedCallback` — read from `helpers.js` and
-  `custom-html-element.js` and quoted from the README's examples. Not run: needs a
-  browser.
+- Hydration beyond the demo page: other markup and other initial-data shapes, and
+  the README's stand-alone snippets — read from `helpers.js` and
+  `custom-html-element.js` and quoted from the README's examples. Only the demo page
+  was run.
 - `hydrate()`'s early-return ordering requirement — read from `helpers.js`; the
   explicit `onReady` + `await register()` sequencing quoted in the demo comes from
   `php-web-component-ssr` `examples/simple/js/main.js`. Not run.

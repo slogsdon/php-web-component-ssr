@@ -19,7 +19,8 @@ $this->layout('partials::layout', [
         its own steps and its own example.</p>
     <p class="t-meta guide-source">Commands and output on the tool pages are quoted from the
         three repositories at the revisions those pages record. The PHP output was produced by
-        running the package; the two JavaScript examples were not executed.</p>
+        running the package. The PHP demo, hydration included, was also run in three
+        browsers. The JSX example was not run.</p>
 </section>
 
 <div class="assembly">

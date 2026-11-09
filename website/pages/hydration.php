@@ -1,7 +1,7 @@
 <?php
 /**
  * Tool page · Hydration: the client-side half. Everything here is read from the
- * repository and quoted from its README; nothing was executed in a browser.
+ * repository and quoted from its README. The PHP demo that uses it was run in three browsers.
  */
 $this->layout('partials::layout', [
     'title' => 'Hydration in the browser · Web Component Tools',
@@ -155,8 +155,17 @@ hydrate(XListItem.is);</code></pre>
             sequence in <code>onReady()</code> and awaits each <code>register()</code> before
             calling <code>hydrate()</code> for that component.</p>
         <p>Both snippets are quoted as written, including the README's <code>XListIem</code>
-            typo in the trailing comment. Nothing in this section was executed while building
-            this page: it needs a browser, and a browser is not part of this build.</p>
+            typo in the trailing comment. The snippets were not run on their own, but the PHP demo
+            they come from was. It was served with <code>php -S</code> on PHP 8.5.11 from
+            <code>php-web-component-ssr</code> at <code>00be84d</code>, with version 1.0.5 of the
+            package from npm (its checksum matches the demo's lockfile), and opened in Chromium,
+            Firefox and WebKit. In all three, no <code>data-template</code> placeholder was left.
+            Each element had a shadow root holding its template, and the page logged no
+            errors.</p>
+        <p>One thing the README doesn't mention is that initial data is added even when the
+            template has no slot for it. The demo's <code>foo: bar</code> became
+            <code>&lt;span slot="foo"&gt;bar&lt;/span&gt;</code>. It is in the element's markup
+            but never shown.</p>
     </div>
 </section>
 
